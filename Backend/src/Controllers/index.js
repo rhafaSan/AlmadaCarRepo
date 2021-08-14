@@ -1,5 +1,5 @@
 import express from "express";
-import client from "../../../db_config";
+import client from "../../db_config";
 
 export async function Post(req, res) {
   const { nome, cargo, data_nascimento, data_entrada } = req.body;
