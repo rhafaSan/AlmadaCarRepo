@@ -4,9 +4,12 @@
     <p>Almada Car</p>
   </div>
   <div>
-    <p>Want to delete this car?</p>
+    <p>Deseja deletar esse funcionário?</p>
 
-    <button @click="deleteCar" >Delete</button>
+    <button @click="deletePessoa" >Deletar</button>
+    <button @click="this.$router.go(-1)">Voltar</button>
+
+
   </div>
 </template>
 
@@ -16,8 +19,8 @@ import api from '@/services/config.js'
 export default {
   name: 'Delete',
   methods: {
-    async deleteCar(){
-      const response = await api.delete(`/carro/${this.$route.params.id}`);
+    async deletePessoa(){
+      const response = await api.delete(`/${this.$route.params.id}`);
       alert(response.data);
     }
   }

@@ -5,28 +5,35 @@
     <p>Almada Car</p>
   </div>
 <div class="list-div">
+  <div class="filters">
+    <label for="">Filtre por cargos:</label>
+    <input type="text" v-model="this.cargo">
+    <button @click="goFilter">Filtrar</button>
 
-  <div v-for="car in this.cars" :key="car.id">
-    <input type="radio" value="car.id" @click="getId(car.id)" name="radioOption" >
-    <h4>Name: </h4>
-    <p>{{car.name}}</p>
+    <label for="">Filtre por quantidade</label>
+    <input type="text" v-model="this.quantidade">
+    <button @click="filterQuantity">Filtrar</button>
+  </div>
+  <div v-for="people in this.peoples" :key="people.id" class="show-all">
+    <input type="radio" value="people.id" @click="getId(people.id)" name="radioOption" >
+    <h4>Nome: </h4>
+    <p>{{people.nome}}</p>
 
-    <h4>Brand: </h4>
-    <p>{{car.brand}}</p>
+    <h4>Cargo: </h4>
+    <p>{{people.cargo}}</p>
 
-    <h4>Made in</h4>
-    <p>{{car.manufacture_year}}</p>
+    <h4>Nascimento</h4>
+    <p>{{people.nascimento}}</p>
 
-    <h4>Model Year:</h4>
-    <p>{{car.model_year}}</p>
-
-    <h4>Sell date: </h4>
-    <p>{{car.date_sale}}</p>
+    <h4>Admissão:</h4>
+    <p>{{people.entrada}}</p>
   </div>
 
-  <button @click="getCarById">ChooseCar</button>
-  <button @click="goToDelete">Choose delete car</button>
-  <button @click="goToUpdate">Choose update</button>
+<div>
+  <button @click="getCarById">Ver funcionario</button>
+  <button @click="goToDelete">Deletar funcionario</button>
+  <button @click="goToUpdate">Atualizar funcionario</button>
+</div>
 </div>
 </div>
 
@@ -39,40 +46,54 @@ export default {
   data(){
     return {
       idParam: null,
-      cars: []
+      peoples: [],
+      cargo: null,
+      quantidade: null
     }
   },
   methods: {
-    async getAllCars(){
-      const response = await api.get('/carro/');
-      this.cars = response.data;
+    async getAllPeoples(){
+      const response = await api.get('/');
+      this.peoples = response.data.Funcionarios;
+      console.log(this.peoples);
     },
     getId(id){
       this.idParam = id;
       console.log(this.idParam);
     },
     getCarById(){
-      this.$router.push(`/show-car/${this.idParam}`);
+      this.$router.push(`/${this.idParam}`);
     },
     goToDelete(){
       this.$router.push(`/delete/${this.idParam}`)
     },
     goToUpdate(){
       this.$router.push(`/update/${this.idParam}`);
+    },
+    async goFilter(){
+      const res = await api.get(`/cargo/${this.cargo}`)
+      console.log(res.data);
+    },
+    async filterQuantity(){
+      const res = await api.get(`/quantidade/${this.quantidade}`);
+      console.log(res.data)
     }
   },
   mounted(){
-    this.getAllCars();
+    this.getAllPeoples();
   }
 }
 </script>
 
-<style>
+<style >
 .list-div{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   padding-top: 1%;
+}
+.show-all{
+  border: 1px solid #000;
 }
 
 </style>

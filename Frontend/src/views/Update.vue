@@ -3,10 +3,10 @@
    <div class="header">
     <p>Almada Car</p>
   </div>
-  <div class="div-form" @submit="updateCar" >
-    <form action="">
+  <div class="div-form" v-for="people of selectedPeople" :key="people.id" >
+    <form action="" @submit="updateCar">
       <label for="">Name:</label>
-      <input type="text" value={{this.name}}>
+      <input type="text" v-model="this.people">
 
       <label for="">Brand:</label>
       <input type="text">
@@ -21,6 +21,8 @@
       <input type="text">
 
       <button>Update</button>
+      <button @click="this.$router.go(-1)">Voltar</button>
+
     </form>
   </div>
 </template>
@@ -32,17 +34,17 @@ export default {
   name: 'Update',
   data(){
     return{
-      selectedCar: null,
+      selectedPeople: [],
       name: null
     }
   },
   methods: {
     async getCar(){
-      const response = await api.get(`/carro/${this.$route.params.id}`);
-      const data = JSON.parse(response.data)
-      this.name = data.name
-      console.log(this.name)
-      console.log(response.data)
+      const response = await api.get(`/${this.$route.params.id}`);
+      // console.log(data);
+      this.selectedPeople = response.data.Funcionario;
+      console.log(this.selectedPeople);
+      console.log(response.data);
     },
   },
   mounted(){

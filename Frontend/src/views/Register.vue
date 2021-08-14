@@ -2,24 +2,29 @@
   <div class="header">
     <p>Almada Car</p>
   </div>
-  <div class="div-form" @submit="registerCar">
+  <div class="div-form" @submit="registerPeople">
     <form action="">
-      <label for="">Name:</label>
-      <input type="text" v-model="this.nameCar">
+      <label for="">Nome:</label>
+      <input type="text" v-model="this.nome">
 
-      <label for="">Brand:</label>
-      <input type="text" v-model="this.brand" >
+      <label for="">Cargo:</label>
+      <select name="" id="" v-model="this.cargo">
+        <option value="Operario">Operário</option>
+        <option value="Trainee">Trainee</option>
+        <option value="Gerente">Gerente</option>
+        <option value="CTO">CTO</option>
 
-      <label for="">Made in:</label>
-      <input type="text" v-model="this.manufacture_year" >
+      </select>
 
-      <label for="">Model year:</label>
-      <input type="text" v-model="this.model_year" >
+      <label for="">Data nascimento:</label>
+      <input type="date" v-model="this.nascimento" >
 
-      <label for="">Sell date:</label>
-      <input type="text" v-model="this.date_sale" >
+      <label for="">Entrada na empresa:</label>
+      <input type="date" v-model="this.entrada" >
 
       <button type="submit">Cadastrar</button>
+    <button @click="this.$router.go(-1)">Voltar</button>
+
     </form>
   </div>
 </template>
@@ -31,28 +36,26 @@ export default {
   name: "Register",
   data(){
     return{
-      nameCar: null,
-      brand: null,
-      manufacture_year: null,
-      model_year: null,
-      date_sale: null
+      nome: null,
+      cargo: null,
+      nascimento: null,
+      entrada: null,
     }
   },
   methods:{
-    async registerCar(e){
+    async registerPeople(e){
       e.preventDefault();
       const data = {
-        nomeCarro: this.nameCar,
-        marca: this.brand,
-        feito: this.manufacture_year,
-        modelo: this.model_year,
-        vendido: this.date_sale
+        nome: this.nome,
+        cargo: this.cargo,
+        nascimento: this.nascimento,
+        entrada: this.entrada,
       }
       console.log(data);
 
       // const dataJson = JSON.stringify(data);
 
-      const response = await api.post('carro/', data);
+      const response = await api.post('/', data);
       if(response.status === 200) {
         this.$router.push('/show-all')
       }
@@ -65,7 +68,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 *{
     margin: 0;
     padding: 0;

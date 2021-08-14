@@ -27,8 +27,8 @@ const router = createRouter({
       component: ShowAll
     },
     {
-      name: 'ShowCar',
-      path: '/show-car/:id',
+      name: 'ShowPeople',
+      path: '/:id',
       component: ShowCar
     },
     {

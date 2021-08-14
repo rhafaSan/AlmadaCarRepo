@@ -1,26 +1,26 @@
 <template>
   <div class="header">
-    <p>Almada Car</p>
+    <p>Almada Funcionarios</p>
   </div>
   <div class="body">
-    <div class="register-car">
-      <p>Register car</p>
+    <div class="register-people">
+      <p>Register people</p>
       <router-link to="/register">Register</router-link>
     </div>
-        <div class="show-cars">
-      <p>Show all cars</p>
+        <div class="show-peoples">
+      <p>Show all peoples</p>
       <router-link to="/show-all">Show All</router-link>
     </div>
-        <div class="show-car">
-      <p>Show a car</p>
-      <router-link to="/show-car/">Show</router-link>
+        <div class="show-people">
+      <p>Show a people</p>
+      <router-link to="/show-people/">Show</router-link>
     </div>
-        <div class="update-car">
-      <p>Update a car registered</p>
+        <div class="update-people">
+      <p>Update a people registered</p>
       <router-link to="/update">Update</router-link>
     </div>
-        <div class="delete-car">
-      <p>Delete a car registered</p>
+        <div class="delete-people">
+      <p>Delete a people registered</p>
       <router-link to="/delete">Delete</router-link>
     </div>
   </div>
@@ -40,7 +40,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   *{
     margin: 0;
     padding: 0;
@@ -61,13 +61,17 @@ export default {
   }
 
   .body{
-    width: 100%;
+    width: 40%;
     height: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10%;
     background-color: #f9f9f9;
     border: 1px solid #681bc0;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
   }
 
 

@@ -3,42 +3,44 @@
   <div class="header">
     <p>Almada Car</p>
   </div>
-  <div v-for="car in selectedCar" :key="car.id">
-    <h4>Name: </h4>
-    <p>{{car.name}}</p>
+  <main v-for="people in selectedPeople" :key="people.id">
+    <h4>Nome: </h4>
+    <p>{{people.nome}}</p>
 
-    <h4>Brand: </h4>
-    <p>{{car.brand}}</p>
+    <h4>Cargo: </h4>
+    <p>{{people.cargo}}</p>
 
-    <h4>Made in</h4>
-    <p>{{car.manufacture_year}}</p>
+    <h4>Nascimento:</h4>
+    <p>{{people.nascimento}}</p>
 
-    <h4>Model Year:</h4>
-    <p>{{car.model_year}}</p>
+    <h4>Admissão:</h4>
+    <p>{{people.entrada}}</p>
 
-    <h4>Sell date: </h4>
-    <p>{{car.date_sale}}</p>
-  </div>
+    <button @click="this.$router.go(-1)">Voltar</button>
+
+  </main>
+
+
 </template>
 
 <script>
 import api from '@/services/config.js'
 export default {
-  name: 'ShowCar',
+  name: 'ShowPeople',
   data(){
     return{
-      selectedCar: null,
+      selectedPeople: null,
     }
   },
   methods: {
-    async getCar(){
-      const response = await api.get(`/carro/${this.$route.params.id}`);
-      this.selectedCar = response.data;
+    async getPeople(){
+      const response = await api.get(`/${this.$route.params.id}`);
+      this.selectedPeople = response.data.Funcionario;
       console.log(response.data)
     },
   },
   mounted(){
-    this.getCar();
+    this.getPeople();
   }
 }
 </script>
