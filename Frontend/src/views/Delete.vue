@@ -1,4 +1,5 @@
 <template>
+<div>
   <router-view/>
   <div class="header">
     <p>Almada Car</p>
@@ -11,6 +12,7 @@
 
 
   </div>
+</div>
 </template>
 
 <script>

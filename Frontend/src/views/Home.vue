@@ -1,36 +1,31 @@
 <template>
+<div>
+
   <div class="header">
     <p>Almada Funcionarios</p>
   </div>
   <div class="body">
     <div class="register-people">
-      <p>Register people</p>
-      <router-link to="/register">Register</router-link>
+      <p>Cadastrar Funcionario</p>
+      <router-link to="/register">Cadastrar</router-link>
     </div>
-        <div class="show-peoples">
-      <p>Show all peoples</p>
-      <router-link to="/show-all">Show All</router-link>
+    
+    <div class="show-peoples">
+      <p>Mostrar Funcionarios</p>
+      <router-link to="/show-all">Mostrar todos</router-link>
     </div>
-        <div class="show-people">
-      <p>Show a people</p>
-      <router-link to="/show-people/">Show</router-link>
+    
+    <div class="update-people">
+      <p>Atualizar Funcionario</p>
+      <router-link to="/update">Atualizar</router-link>
     </div>
-        <div class="update-people">
-      <p>Update a people registered</p>
-      <router-link to="/update">Update</router-link>
-    </div>
-        <div class="delete-people">
-      <p>Delete a people registered</p>
-      <router-link to="/delete">Delete</router-link>
+    
+    <div class="delete-people">
+      <p>Deletar funcionario</p>
+      <router-link to="/delete">Deletar</router-link>
     </div>
   </div>
-     <!-- <router-link to="/">Home</router-link> -->
-
-  <!-- <button @click="goAbout()" >About</button>
-  <router-view>
-    <About/>
-    
-  <router-view/> -->
+</div>
 </template>
 
 <script>
@@ -40,7 +35,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
   *{
     margin: 0;
     padding: 0;

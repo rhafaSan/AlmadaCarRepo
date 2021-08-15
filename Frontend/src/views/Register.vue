@@ -1,9 +1,10 @@
 <template>
+<div>
   <div class="header">
     <p>Almada Car</p>
   </div>
-  <div class="div-form" @submit="registerPeople">
-    <form action="">
+  <div class="div-form" >
+    <form @submit="registerPeople">
       <label for="">Nome:</label>
       <input type="text" v-model="this.nome">
 
@@ -27,6 +28,7 @@
 
     </form>
   </div>
+</div>
 </template>
 
 <script>
@@ -68,7 +70,7 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
 *{
     margin: 0;
     padding: 0;

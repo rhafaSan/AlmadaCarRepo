@@ -2,37 +2,44 @@
 <div>
   <router-view/>
   <div class="header">
-    <p>Almada Car</p>
+    <p>Almada Funcionarios</p>
   </div>
 <div class="list-div">
   <div class="filters">
-    <label for="">Filtre por cargos:</label>
-    <input type="text" v-model="this.cargo">
-    <button @click="goFilter">Filtrar</button>
-
-    <label for="">Filtre por quantidade</label>
-    <input type="text" v-model="this.quantidade">
-    <button @click="filterQuantity">Filtrar</button>
+    <div class="offices">
+      <label for="">Filtre por cargos:</label>
+      <input type="text" v-model="this.cargo">
+      <button @click="filtrarCargo">Filtrar</button>
+    </div>
+    <br>
+    <div class="quantitys">
+      <label for="">Filtre por quantidade</label>
+      <input type="text" v-model="this.quantidade">
+      <button @click="filtrarQuantidade">Filtrar</button>
+    </div>
   </div>
-  <div v-for="people in this.peoples" :key="people.id" class="show-all">
-    <input type="radio" value="people.id" @click="getId(people.id)" name="radioOption" >
-    <h4>Nome: </h4>
-    <p>{{people.nome}}</p>
+  <div class="show-all">
+    <div v-for="funcionario in this.funcionarios" :key="funcionario.id" class="unique" >
+      <input type="radio" value="funcionario.id" @click="getId(funcionario.id)" name="radioOption" >
+      <h4>Nome: </h4>
+      <p>{{funcionario.nome}}</p>
 
-    <h4>Cargo: </h4>
-    <p>{{people.cargo}}</p>
+      <h4>Cargo: </h4>
+      <p>{{funcionario.cargo}}</p>
 
-    <h4>Nascimento</h4>
-    <p>{{people.nascimento}}</p>
+      <h4>Nascimento</h4>
+      <p>{{funcionario.nascimento}}</p>
 
-    <h4>Admissão:</h4>
-    <p>{{people.entrada}}</p>
+      <h4>Admissão:</h4>
+      <p>{{funcionario.entrada}}</p>
+    </div>
+
   </div>
 
-<div>
-  <button @click="getCarById">Ver funcionario</button>
-  <button @click="goToDelete">Deletar funcionario</button>
-  <button @click="goToUpdate">Atualizar funcionario</button>
+<div class="btn-div">
+  <button @click="getFuncionario">Ver funcionario</button>
+  <button @click="deleteFuncionario">Deletar funcionario</button>
+  <button @click="atualizeFuncionario">Atualizar funcionario</button>
 </div>
 </div>
 </div>
@@ -46,41 +53,45 @@ export default {
   data(){
     return {
       idParam: null,
-      peoples: [],
+      funcionarios: [],
       cargo: null,
-      quantidade: null
+      quantidade: null,
+      filterOffice: [],
+      filtrarQuantidades: []
     }
   },
   methods: {
-    async getAllPeoples(){
+    async getFuncionarios(){
       const response = await api.get('/');
-      this.peoples = response.data.Funcionarios;
-      console.log(this.peoples);
+      this.funcionarios = response.data.Funcionarios;
+      console.log(this.funcionarios);
     },
     getId(id){
       this.idParam = id;
       console.log(this.idParam);
     },
-    getCarById(){
+    getFuncionario(){
       this.$router.push(`/${this.idParam}`);
     },
-    goToDelete(){
+    deleteFuncionario(){
       this.$router.push(`/delete/${this.idParam}`)
     },
-    goToUpdate(){
+    atualizeFuncionario(){
       this.$router.push(`/update/${this.idParam}`);
     },
-    async goFilter(){
+    async filtrarCargo(){
       const res = await api.get(`/cargo/${this.cargo}`)
-      console.log(res.data);
+      console.log(res.data.Funcionario);
+      this.filterOffice = res.data.Funcionario;
     },
-    async filterQuantity(){
+    async filtrarQuantidade(){
       const res = await api.get(`/quantidade/${this.quantidade}`);
-      console.log(res.data)
+      console.log(res.data.Funcionarios);
+      this.filtrarQuantidades = res.data.Funcionarios;
     }
   },
   mounted(){
-    this.getAllPeoples();
+    this.getFuncionarios();
   }
 }
 </script>
@@ -94,6 +105,50 @@ export default {
 }
 .show-all{
   border: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.unique{
+  display: flex;
+  border: 1px solid #000;
+  flex-direction: column;
+}
+
+.filters{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 10vh;
+  margin-bottom: 1%;
+}
+
+.offices {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.quantitys{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+input[type=text]{
+  width: 150px;
+  margin: 0 auto 0 auto;
+}
+
+.btn-div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+button:hover{
+  cursor: pointer;
 }
 
 </style>
