@@ -108,7 +108,7 @@ export async function Delete(req, res) {
 
      const deleteFuncionario = "DELETE FROM funcionario WHERE id = $1;"
      await client.query(deleteFuncionario, [id]);
-    return res.status(200).json({ Message: "Funcionario deletado com sucesso!" });
+    return res.status(200).json({ message: "Funcionario deletado com sucesso!" });
   } catch (error) {
     return res.status(400).json({ message: "Não existe nenhum correspondente" });
   }

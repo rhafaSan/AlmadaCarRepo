@@ -9,6 +9,6 @@ routes.get("/:id", GetById);
 routes.get("/cargo/:cargo", GetByoffice);
 routes.get("/quantidade/:qtd", GetByQtd);
 routes.put("/:id", Update);
-routes.delete("/:id", GetById)
+routes.delete("/:id", Delete)
 
 export default routes;
