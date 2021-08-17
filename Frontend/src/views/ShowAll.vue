@@ -17,22 +17,27 @@
       <input type="text" v-model="this.quantidade">
       <button @click="filtrarQuantidade">Filtrar</button>
     </div>
+    <div class="clean">
+      <label for="">Limpar filtros</label>
+      <button @click="limpaFiltros" >Limpar</button>
+    </div>
   </div>
   <div class="show-all">
-    <div v-for="funcionario in this.funcionarios" :key="funcionario.id" class="unique" >
-      <input type="radio" value="funcionario.id" @click="getId(funcionario.id)" name="radioOption" >
-      <h4>Nome: </h4>
-      <p>{{funcionario.nome}}</p>
+      <div v-for="funcionario in this.funcionarios" :key="funcionario.id" class="unique" >
+        <input type="radio" value="funcionario.id" @click="getId(funcionario.id)" name="radioOption" >
+        <h4>Nome: </h4>
+        <p>{{funcionario.nome}}</p>
 
-      <h4>Cargo: </h4>
-      <p>{{funcionario.cargo}}</p>
+        <h4>Cargo: </h4>
+        <p>{{funcionario.cargo}}</p>
 
-      <h4>Nascimento</h4>
-      <p>{{funcionario.nascimento}}</p>
+        <h4>Data de Nascimento</h4>
+        <p>{{funcionario.data_nascimento }}</p>
 
-      <h4>Admissão:</h4>
-      <p>{{funcionario.entrada}}</p>
-    </div>
+        <h4>Data de Admissão:</h4>
+        <p>{{funcionario.data_entrada}}</p>
+      </div>
+
 
   </div>
 
@@ -56,8 +61,8 @@ export default {
       funcionarios: [],
       cargo: null,
       quantidade: null,
-      filterOffice: [],
-      filtrarQuantidades: []
+      filterOffice: false,
+      filtrarQuantidades: false
     }
   },
   methods: {
@@ -79,15 +84,31 @@ export default {
     atualizeFuncionario(){
       this.$router.push(`/update/${this.idParam}`);
     },
+    limpaFiltros(){
+      this.cargo = '';
+      this.quantidade = '';
+    }
+    ,
     async filtrarCargo(){
-      const res = await api.get(`/cargo/${this.cargo}`)
-      console.log(res.data.Funcionario);
-      this.filterOffice = res.data.Funcionario;
+      try{
+        const res = await api.get(`/cargo/${this.cargo}`)
+        console.log(res.data.Funcionario);
+        this.filterOffice = true
+        this.funcionarios = res.data.Funcionario
+        console.log(this.filterOffice);
+      }catch(e){
+        alert(e.response.data.message)
+      }
     },
     async filtrarQuantidade(){
-      const res = await api.get(`/quantidade/${this.quantidade}`);
-      console.log(res.data.Funcionarios);
-      this.filtrarQuantidades = res.data.Funcionarios;
+      try{
+        const res = await api.get(`/quantidade/${this.quantidade}`);
+        console.log(res.data.Funcionarios);
+        this.funcionarios = res.data.Funcionarios;
+
+      }catch(e){
+        alert(e.response.data.message)
+      }    
     }
   },
   mounted(){
@@ -122,6 +143,7 @@ export default {
   justify-content: space-evenly;
   height: 10vh;
   margin-bottom: 1%;
+  margin-bottom: 5%;
 }
 
 .offices {
@@ -149,6 +171,16 @@ input[type=text]{
 
 button:hover{
   cursor: pointer;
+}
+
+.clean{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.clean button{
+  width: auto;
 }
 
 </style>

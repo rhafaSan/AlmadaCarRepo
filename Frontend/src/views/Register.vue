@@ -50,8 +50,8 @@ export default {
       const data = {
         nome: this.nome,
         cargo: this.cargo,
-        nascimento: this.nascimento,
-        entrada: this.entrada,
+        data_nascimento: this.nascimento,
+        data_entrada: this.entrada,
       }
       console.log(data);
 
@@ -70,7 +70,7 @@ export default {
 
 </script>
 
-<style>
+<style  >
 *{
     margin: 0;
     padding: 0;

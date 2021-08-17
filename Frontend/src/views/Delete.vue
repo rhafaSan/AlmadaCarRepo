@@ -23,7 +23,8 @@ export default {
   methods: {
     async deletePessoa(){
       const response = await api.delete(`/${this.$route.params.id}`);
-      alert(response.data);
+      alert(response.data.message);
+      this.$router.go(-1)
     }
   }
 }

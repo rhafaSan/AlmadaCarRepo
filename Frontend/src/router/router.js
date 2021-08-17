@@ -3,7 +3,7 @@ import { createWebHistory, createRouter } from 'vue-router';
 import Home from '@/views/Home.vue';
 import Register from '@/views/Register.vue';
 import ShowAll from '@/views/ShowAll.vue';
-import ShowCar from '@/views/ShowCar.vue';
+import ShowPeople from '@/views/ShowPeople.vue';
 import Update from '@/views/Update.vue';
 import Delete from '@/views/Delete.vue';
 
@@ -29,7 +29,7 @@ const router = createRouter({
     {
       name: 'ShowPeople',
       path: '/:id',
-      component: ShowCar
+      component: ShowPeople
     },
     {
       name: 'Update',
